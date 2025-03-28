@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Mapper</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Network Mapper</h1>
+            <p>Network Device Mapping and Vulnerability Assessment Tool</p>
+        </header>
+        
+        <div class="tabs">
+            <button class="tab-button active" data-tab="new-scan">New Scan</button>
+            <button class="tab-button" data-tab="scan-results">Scan Results</button>
+            <button class="tab-button" data-tab="scan-details">Scan Details</button>
+        </div>
+        
+        <div class="tab-content active" id="new-scan">
+            <h2>Start a New Scan</h2>
+            <form id="scan-form">
+                <div class="form-group">
+                    <label for="network">Network Range (CIDR):</label>
+                    <input type="text" id="network" name="network" placeholder="e.g., 192.168.1.0/24" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="output">Output Directory:</label>
+                    <input type="text" id="output" name="output" placeholder="Leave blank for auto-generated">
+                </div>
+                
+                <div class="form-group">
+                    <label for="threads">Threads:</label>
+                    <input type="number" id="threads" name="threads" value="10" min="1" max="50">
+                </div>
+                
+                <div class="form-group options">
+                    <label>Options:</label>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="verbose" name="verbose">
+                        <label for="verbose">Verbose Output</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="skip-vuln-scan" name="skip-vuln-scan">
+                        <label for="skip-vuln-scan">Skip Vulnerability Scanning</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="skip-cred-check" name="skip-cred-check">
+                        <label for="skip-cred-check">Skip Credential Checking</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="skip-fingerprinting" name="skip-fingerprinting">
+                        <label for="skip-fingerprinting">Skip Service Fingerprinting</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="install-deps" name="install-deps" checked>
+                        <label for="install-deps">Install Missing Dependencies</label>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn primary">Start Scan</button>
+                </div>
+            </form>
+            
+            <div id="scan-status" class="hidden">
+                <h3>Scan in Progress</h3>
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+                <p id="status-message">Initializing scan...</p>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="scan-results">
+            <h2>Previous Scan Results</h2>
+            <div class="scan-list">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date/Time</th>
+                            <th>Network</th>
+                            <th>Hosts</th>
+                            <th>Vulnerable</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="scan-list-body">
+                        <!-- Scan results will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="scan-details">
+            <h2>Scan Details</h2>
+            <div id="scan-details-content">
+                <p>Select a scan from the Scan Results tab to view details.</p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html> 
